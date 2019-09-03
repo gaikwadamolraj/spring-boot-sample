@@ -1,0 +1,5 @@
+.*
+!.gitignore
+target
+mvnw
+mvnw.cwd
