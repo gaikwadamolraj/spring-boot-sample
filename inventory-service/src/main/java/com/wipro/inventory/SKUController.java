@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
-@RestController 
-
+@RestController
 public class SKUController {
 	static AtomicInteger ID = new AtomicInteger();
 	List<SKU> skus = new ArrayList<>();
@@ -36,6 +35,5 @@ public class SKUController {
 		
 		return new ResponseEntity<> (new SKUResponse("Created", "Created new product", null), HttpStatus.CREATED);
 	}
-	
 
 }
