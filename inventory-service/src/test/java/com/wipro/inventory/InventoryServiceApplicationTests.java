@@ -44,7 +44,7 @@ public class InventoryServiceApplicationTests {
 		sku.setName("one");
 		sku.setCount(5);
 		sku.setPrice(1.5);
-		sku.setProductID(1);
+		sku.setProductId(1);
 		ResponseEntity<?> res = restTemplate.postForEntity("/skus", sku, SKU.class);
 		assertEquals(HttpStatus.CREATED, res.getStatusCode());		
 	}

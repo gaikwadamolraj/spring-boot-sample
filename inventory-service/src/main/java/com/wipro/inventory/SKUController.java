@@ -28,8 +28,8 @@ public class SKUController {
 		newSku.setId(ID.incrementAndGet());
 		skus.add(newSku);
 		
-		if(null == newSku.getProductID()) {
-			SKUResponse response = new SKUResponse("Bad Reqeust",null, "productId should not be null");
+		if(null == newSku.getProductId()) {
+			SKUResponse response = new SKUResponse("Bad Reqeust","Product Id mandatory", "productId should not be null");
 			return new ResponseEntity<> (response, HttpStatus.BAD_REQUEST);
 		}
 		
