@@ -33,7 +33,7 @@ public class InventoryServiceApplicationTests {
 	
 	@Test
 	public void test02GetSKUs() {
-		ResponseEntity<List> res = restTemplate.getForEntity("/skus/", List.class);
+		ResponseEntity<List> res = restTemplate.getForEntity("/skus", List.class);
 		assertEquals(HttpStatus.OK, res.getStatusCode());
 		assertEquals(0, res.getBody().size());
 	}
@@ -44,17 +44,14 @@ public class InventoryServiceApplicationTests {
 		sku.setName("one");
 		sku.setCount(5);
 		sku.setPrice(1.5);
-		ResponseEntity<SKU> res = restTemplate.postForEntity("/skus/", sku, SKU.class);
-		assertEquals(HttpStatus.OK, res.getStatusCode());
-		assertEquals(sku.getName(), res.getBody().getName());
-		assertTrue(res.getBody().getId() != null);
-		
-		
+		sku.setProductID(1);
+		ResponseEntity<?> res = restTemplate.postForEntity("/skus", sku, SKU.class);
+		assertEquals(HttpStatus.CREATED, res.getStatusCode());		
 	}
 	
 	@Test
 	public void test04GetSKUs() {
-		ResponseEntity<List> res = restTemplate.getForEntity("/skus/", List.class);
+		ResponseEntity<List> res = restTemplate.getForEntity("/skus", List.class);
 		assertEquals(HttpStatus.OK, res.getStatusCode());
 		assertEquals(1, res.getBody().size());
 	}

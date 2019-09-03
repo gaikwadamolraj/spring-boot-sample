@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,25 +16,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RestController 
 
 public class SKUController {
-	
 	static AtomicInteger ID = new AtomicInteger();
 	List<SKU> skus = new ArrayList<>();
 	
-	@GetMapping ("/skus/")
+	@GetMapping ("/skus")
 	public List<SKU> getSKUs() {
 		return skus;
 	}
 	
-	@PostMapping("/skus/")
-	public ResponseEntity<?> addSKU(@RequestBody SKU newSku) {
+	@PostMapping("/skus")
+	public ResponseEntity<SKUResponse> addSKU(@RequestBody SKU newSku) {
 		newSku.setId(ID.incrementAndGet());
 		skus.add(newSku);
 		
 		if(null == newSku.getProductID()) {
-			return new ResponseEntity<> ("productId should not be null", HttpStatus.BAD_REQUEST);
+			SKUResponse response = new SKUResponse("Bad Reqeust",null, "productId should not be null");
+			return new ResponseEntity<> (response, HttpStatus.BAD_REQUEST);
 		}
 		
-		return new ResponseEntity<> ("Created new product", HttpStatus.CREATED);
+		return new ResponseEntity<> (new SKUResponse("Created", "Created new product", null), HttpStatus.CREATED);
 	}
 	
 
